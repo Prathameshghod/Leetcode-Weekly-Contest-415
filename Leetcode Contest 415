@@ -1,4 +1,4 @@
-##################   100434. The Two Sneaky Numbers of Digitville   ****************************
+##################   3289. The Two Sneaky Numbers of Digitville   ****************************
 
 from typing import List
 
@@ -21,7 +21,7 @@ class Solution:
         
         return sneaky_numbers
 
-#################  100380. Maximum Multiplication Score ****************************
+#################  3290. Maximum Multiplication Score ****************************
 
 from typing import List
 
