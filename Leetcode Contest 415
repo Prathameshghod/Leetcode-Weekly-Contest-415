@@ -1,0 +1,54 @@
+##################   100434. The Two Sneaky Numbers of Digitville   ****************************
+
+from typing import List
+
+class Solution:
+    def getSneakyNumbers(self, nums: List[int]) -> List[int]:
+        sneaky_numbers = []
+        frequency = {}
+        
+        # Count the occurrences of each number in the list
+        for number in nums:
+            if number in frequency:
+                frequency[number] += 1
+            else:
+                frequency[number] = 1
+        
+        # Find numbers that occur exactly twice
+        for number, count in frequency.items():
+            if count == 2:
+                sneaky_numbers.append(number)
+        
+        return sneaky_numbers
+
+#################  100380. Maximum Multiplication Score ****************************
+
+from typing import List
+
+class Solution:
+    def maxScore(self, a: List[int], b: List[int]) -> int:
+        num_elements = len(b)
+        
+        # Initialize a 2D list to store the maximum scores.
+        # Using -inf to represent initially impossible scores.
+        dp = [[float('-inf')] * 4 for _ in range(num_elements)]
+        
+        # Base case: when considering the first element, only the 0-th position is filled.
+        dp[0][0] = a[0] * b[0]
+        
+        # Iterate through each element of the second list 'b'
+        for i in range(1, num_elements):
+            # Copy previous values for the current element
+            for j in range(4):
+                dp[i][j] = dp[i-1][j]
+            
+            # Update the dp table based on choices made so far
+            for j in range(1, 4):
+                dp[i][j] = max(dp[i][j], dp[i-1][j-1] + a[j] * b[i])
+            
+            # Consider the case where we take only the first element of 'a'
+            dp[i][0] = max(dp[i][0], a[0] * b[i])
+        
+        # Find the maximum score achievable by taking 3 elements from 'a' (or fewer)
+        return max(dp[i][3] for i in range(3, num_elements))
+
